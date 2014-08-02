@@ -3,36 +3,39 @@
 {% block title %} Cadastro Pessoa {% endblock %}
 
 {% block content %}
-    <form action="." method="post"> {% csrf_token %}
-        <h3>Cadastro Pessoa </h3>
-        
-        <div class="control-goup">
-            <label for="nome" class="control-label">Nome</label>
-                <div class="controls">
-                    <input type="text" id="nome" name= "nome" placeholder="Nome" required autofocus>
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastro Pessoa</h3>
+                    <form action = "." method = "post" class=''> {% csrf_token %}
+                    <p></p>
+                    <div class='ui fluid input'>
+                        <label for = "nome" class = "control-label" > Nome </label>
+                        <input type = "text" id = "nome" name = "nome" placeholder = "Nome" required autofocus>
+                    </div>
+                    <div class="ui ignored divider"></div>
+                    <div class='ui fluid input'>
+                        <label for = "endereco" class = "control-label" > Endereço </label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Endereço" required>
+                    </div>
+                    <div class="ui ignored divider"></div>
+                    <div class='ui fluid input'>
+                        <label for = "nome" class = "control-label" > Telefone </label>
+                        <input type = "text" id = "telefone" name = "telefone" placeholder = "Telefone" required >
+                    </div>
+                    <div class="ui ignored divider"></div>
+                    <div class='ui fluid input'>
+                        <label for = "nome" class = "control-label" > Telefone Celular </label>
+                        <input type = "text" id = "telefoneCel" name = "telefoneCel" placeholder = "Telefone Celular" required >
+                    </div>
+                    <div class="ui ignored divider"></div>
+                    <button type = "submit" class='ui hover button purple circular small' > Cadastrar </button >
+                    </form>
                 </div>
+            </div>
         </div>
-
-        <div class="control-goup">
-            <label for="endereco" class="control-label">Endereço</label>
-                <div class="controls">
-                    <input type="text" id="endereco" name= "endereco" placeholder="Endereço" required>
-                </div>
-        </div>
-
-        <div class="control-goup">
-            <label for="nome" class="control-label">Telefone</label>
-                <div class="controls">
-                    <input type="text" id="telefone" name= "telefone" placeholder="Telefone" required>
-                </div>
-        </div>
-         <div class="control-goup">
-            <label for="nome" class="control-label">Telefone Celular</label>
-                <div class="controls">
-                    <input type="text" id="telefoneCel" name= "telefoneCel" placeholder="Telefone Celular" required>
-                    <button type="submit">Cadastrar</button>
-                </div>
-        </div>                  
-      </form>
-
+    </div>
 {% endblock %}

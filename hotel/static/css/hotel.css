@@ -1,7 +1,8 @@
 body {
 
     color:#000;
-    font-family: "Trebuchet MS", Verdana, Helvetica, sans-serif
+    font-family: "Trebuchet MS", Verdana, Helvetica, sans-serif;
+    background-color:#F6F3D5;
 }
 
 a {
@@ -13,5 +14,20 @@ a {
 
 nav {
 
-    background-color: #FFA21F;
+    margin-bottom: 1em;
+
+}
+form{
+
+    padding: 10px;
+}
+.cadPessoa.raised{
+
+    margin-left: 25%;
+    border-radius: 1em;
+}
+
+button{
+
+    float:right;
 }

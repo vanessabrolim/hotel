@@ -5,28 +5,28 @@ from models import *
 class FormAnimal (forms.ModelForm):
 
     class Meta(object):
-        model = animal
+        model = Animal
 
 
 class FormPessoa (forms.ModelForm):
 
     class Meta(object):
-        model = pessoa
+        model = Pessoa
 
 
 class FormCumprimento (forms.ModelForm):
 
     class Meta(object):
-        model = cumprimento
+        model = Cumprimento
 
 
 class FormRecomendacao (forms.ModelForm):
 
     class Meta(object):
-        model = recomendacao
+        model = Recomendacao
 
 
 class FormEstadia (forms.ModelForm):
 
     class Meta(object):
-        model = estadia
+        model = Estadia

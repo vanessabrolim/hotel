@@ -34,7 +34,6 @@ urlpatterns = patterns(
 
     # outros e testes
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^oi/', 'hotel.hotel.views.teste', name='teste'),
-    url(r'^media/(.*)$', 'django.hotel.views.static.serve',
+    url(r'^media/(.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
 )

@@ -1,15 +1,19 @@
 from django.template import RequestContext
+from django.http.response import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from models import pessoa
+from models import *
 from forms import *
 
 
-def teste(request):
+def home(request):
     global context
     context = RequestContext(request)
-    return render(request, 'home.html', context)
+    pessoas = Pessoa.objects.all()
+    animais = Animal.objects.all()
+    return render(request, 'home.html', {'animais':animais, 'pessoas':pessoas})
 
 
 def CadastroAnimal(request):
@@ -27,8 +31,6 @@ def CadastroPessoa(request):
     form = FormPessoa(request.POST)
     if request.method == "POST" and form.is_valid():
         p = form.save()
-        people =  models.pessoa(nome = request.POST.get('nome'))
-        la = people.save()
         return HttpResponseRedirect(reverse('nHome'))
     else:
         form = FormPessoa()
