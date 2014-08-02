@@ -1,0 +1,17 @@
+body {
+
+    color:#000;
+    font-family: "Trebuchet MS", Verdana, Helvetica, sans-serif
+}
+
+a {
+
+    text-decoration: none;
+    margin-right: 15%;
+    color: #444;
+}
+
+nav {
+
+    background-color: #FFA21F;
+}

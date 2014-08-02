@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+
+{% block content %}
+    <form action="." method="post"> {% csrf_token %}
+        <h3>Cadastro Pessoa </h3>
+        
+        <div class="control-goup">
+            <label for="nome" class="control-label">Nome</label>
+                <div class="controls">
+                    <input type="text" id="nome" name= "nome" placeholder="Nome" required autofocus>
+                </div>
+        </div>
+
+        <div class="control-goup">
+            <label for="endereco" class="control-label">Endereço</label>
+                <div class="controls">
+                    <input type="text" id="endereco" name= "endereco" placeholder="Endereço" required>
+                </div>
+        </div>
+
+        <div class="control-goup">
+            <label for="nome" class="control-label">Telefone</label>
+                <div class="controls">
+                    <input type="text" id="telefone" name= "telefone" placeholder="Telefone" required>
+                </div>
+        </div>
+         <div class="control-goup">
+            <label for="nome" class="control-label">Telefone Celular</label>
+                <div class="controls">
+                    <input type="text" id="telefoneCel" name= "telefoneCel" placeholder="Telefone Celular" required>
+                    <button type="submit">Cadastrar</button>
+                </div>
+        </div>                  
+      </form>
+
+{% endblock %}

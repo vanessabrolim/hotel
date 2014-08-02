@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/semantic.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/hotel.css'/>
+    <title>Casinha - {% block title %} {% endblock %}</title>
+</head>
+<body>
+    <header class='ui three column divided grid center middle aligned'>
+        <div class='row'>
+            <nav id='esquerda' class='two column'>
+                <div class='row'>
+                    <a href='/cadastro1/' class='column'>Cadastros</a>
+                    <a href='/alteracoes/'class='column'>Alterações</a>
+                </div>
+            </nav>
+            <figure id='logo' class='one column'>
+                <i class="massive home icon"></i>
+            </figure>
+            <nav id='direita' class='two column'>
+                <div class='row'>
+                    <a href='/relatorios/' class='column'>Relatórios</a>
+                    <a href='/config/'class='column'>Configurações</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+</body>
+{% block content %}
+{% endblock %}
+</html>
