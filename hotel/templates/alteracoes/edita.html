@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Alterações {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu orange' {% endblock %}
+{% block navCadastro %}'item'{% endblock %}
+{% block navAlteracoes %}'item active'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid edita'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui orange ribbon huge label">Escolha o tipo de edição</h3>
+                    <div class='ui link list'>
+                        <a href='/editar/pessoa/inicial' class='item'><i class="icon user large"></i>Editar Pessoa</a>
+                        <a href='/editar/animal/inicial' class='item'><i class="fa fa-paw fa-15x"></i>Editar Animal</a>
+                        <a href='/editar/estadia' class='item'><i class="icon home large"></i>Editar Estadia</a>
+                        <a href='/editar/recomendacao' class='item'>Editar <i class="icon book large"></i>Recomendacao</a>
+                    </ul>
+                </div>
+
+{% endblock %}

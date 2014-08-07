@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Animal {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+{% block content %}
+    <div class='ui grid cadastro'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Escolha o tipo de cadastro</h3>
+                    <div class='ui link list'>
+                        <a href='/cadastro/pessoaInicial' class='item'><i class="icon user large"></i>Cadastrar Pessoa</a>
+                        <a href='/cadastro/animalInicial' class='item'><i class="fa fa-paw fa-15x"></i>Cadastrar Animal</a>
+                        <a href='/cadastro/estadiaInicial' class='item'><i class="icon home large"></i>Cadastrar Estadia</a>
+                        <a href='/cadastro/recomendacaoInicial' class='item'>Cadastrar <i class="icon book large"></i>Recomendacao</a>
+                    </ul>
+                </div>
+
+{% endblock %}

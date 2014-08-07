@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastro Animal</h3>
+                    <form action = "" method = "POST"   > {% csrf_token %}
+                    <p></p>
+                    <div class='ui fluid input'>
+                        <label for = "cpf" class = "control-label" > CPF </label>
+                        <input type = "text" id = "cpf" name = "cpf" placeholder = "CPF" required autofocus>
+                    </div>
+                    <div class="ui ignored divider"></div>
+                    <button type = "submit" class='ui hover button purple circular small' > Buscar </button >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Animal {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastro Animal</h3>
+                    <form action = "." method = "post"> {% csrf_token %}
+                        <p></p>
+                        <div class='ui fluid input'>
+                            <label for = "nome" class = "control-label" > Nome </label>
+                            <input type = "text" id = "nome" name = "nome" placeholder = "Nome" required autofocus>
+                        </div>
+                            <input type='hidden' id='dono' name='dono' value={{cpf}}>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for = "especie" class = "control-label" > Espécie </label>
+                            <input type="text" id="especie" name="especie" placeholder="Espécie" required>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for = "raca" class = "control-label" > Raça </label>
+                            <input type = "text" id = "raca" name = "raca" placeholder = "Raça" required >
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for = "idade" class = "control-label" > Idade </label>
+                            <input type = "text" id = "idade" name = "idade" placeholder = "Idade" required >
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for = "pelagem" class = "control-label" > Pelagem </label>
+                            <input type = "text" id = "pelagem" name = "pelagem" placeholder = "Pelagem" required >
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for = "caracteristica_marcante" class = "control-label" > Característica Marcante </label>
+                            <input type = "text" id = "caracteristica_marcante" name = "caracteristica_marcante" placeholder = "Característica Marcante" required >
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <button type = "submit" class='ui hover button purple circular small' > Cadastrar </button >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

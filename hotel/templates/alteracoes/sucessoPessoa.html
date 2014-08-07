@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block menuColor %} 'ui fluid four large item menu orange' {% endblock %}
+{% block navCadastro %}'item'{% endblock %}
+{% block navAlteracoes %}'item active'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui orange ribbon huge label">Cadastro alterado com sucesso!</h3>
+                    <p>CPF: {{ pessoa.cpf }} </p>
+                    <p>Nome: {{ pessoa.nome }} </p>
+                    <p>Endereço: {{ pessoa.endereco }} </p>
+                    <p>Telefone Celular: {{ pessoa.telefoneCel }} </p>
+                    <p>Telefone: {{ pessoa.telefone }} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

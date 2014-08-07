@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Altera Pessoa {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu orange' {% endblock %}
+{% block navCadastro %}'item'{% endblock %}
+{% block navAlteracoes %}'item active'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui orange ribbon huge label">Alterar Cadastro Pessoa</h3>
+                    <p>{{mensagem}}</p>
+                    <form action = "." method = "post" class=''> {% csrf_token %}
+                        <p></p>
+                        <div class='ui fluid input'>
+                            <label for = "cpf" class = "control-label" > CPF: </label>
+                            <input id='cpf' name='cpf' type='text' value={{ pessoa.cpf }} required>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <label for = "nome" class = "control-label" > Nome:  </label>
+                        <div class='ui fluid  input'>
+                            <input type = "text" value='{{ pessoa.nome }}' id = "nome" name = "nome" placeholder = "Nome" required autofocus >
+                            <div class="ui corner orange label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <label for = "endereco" class = "control-label" > Endereço:  </label>
+                        <div class='ui fluid input'>
+                            <input type="text" id="endereco" name="endereco" required value={{ pessoa.endereco }}>
+                            <div class="ui corner orange label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <label for = "telefoneCel" class = "control-label" > Telefone Celular:  </label>
+                        <div class='ui fluid input'>
+                            <input type = "text" id = "telefoneCel" name = "telefoneCel" placeholder = "Telefone Celular" required value={{pessoa.telefoneCel}}>
+                            <div class="ui corner orange label">
+                                <i class="asterisk icon" alt='obrigatorio'></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                             <label for = "telefone" class = "control-label" > Telefone:  </label>
+                            <input type = "text" id = "telefone" name = "telefone" placeholder = "Telefone" value={{ pessoa.telefone }}>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <button type = "submit" class='ui hover button orange circular small' > Alterar Cadastro </button >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastro Pessoa</h3>
+                    <form action = "." method = "post" class=''> {% csrf_token %}
+                        <p></p>
+                        <div class='ui fluid input'>
+                            <label for = "cpf" class = "control-label" > CPF </label>
+                            <input id='cpf' name='cpf' type='text' required placeholder = "CPF" value={{cpf}}>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid  input'>
+                            <input type = "text" id = "nome" name = "nome" placeholder = "Nome" required autofocus>
+                            <div class="ui corner purple label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <input type="text" id="endereco" name="endereco" placeholder="Endereço" required>
+                            <div class="ui corner purple label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <input type = "text" id = "telefoneCel" name = "telefoneCel" placeholder = "Telefone Celular" required >
+                            <div class="ui corner purple label">
+                                <i class="asterisk icon" alt='obrigatorio'></i>
+                            </div>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <input type = "text" id = "telefone" name = "telefone" placeholder = "Telefone" >
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <button type = "submit" class='ui hover button purple circular small' > Cadastrar </button >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

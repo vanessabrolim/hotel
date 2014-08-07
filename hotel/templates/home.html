@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title%} HOME {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu' {% endblock %}
+{% block navCadastro %}'item'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+{% block content %}
+    {% for animal in animais%}
+        {{ animal.nome }}
+        {{ animal.dono }}<br/>
+    {% endfor %}
+    <p>------------------------------------</p>
+    {% for pessoa in pessoas %}
+        {{ pessoa.nome }} - {{ pessoa.id }} - {{ pessoa.cpf }} <br/>
+    {% endfor %}
+    <p>------------------------------------</p>
+    {% for estadia in estadias %}
+        {{estadia.animal}}
+        {{ estadia.data_entrada |date:"d/m/Y"}}<br/>
+        {{ estadia.horario_entrada | time:"H:i"}}<br/>
+        {{ estadia.data_saida |date:"d/m/Y"}}<br/>
+        {{ estadia.horario_saida | time:"h:i"}}<br/>
+        ativa: {{ estadia.ativa }}
+    {% endfor %}
+
+{% endblock %}

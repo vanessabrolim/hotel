@@ -5,18 +5,72 @@ body {
     background-color:#F6F3D5;
 }
 
-a {
+h3.ui.ribbon.label{
+
+    left:-2.25rem;
+}
+a{
 
     text-decoration: none;
-    margin-right: 15%;
-    color: #444;
 }
 
-nav {
+i.fa{
+
+    display: inline-block;
+    opacity: 0.75;
+    margin: 0em 1em 0em 0em;
+    width: 1.23em;
+    height: 1em;
+    line-height: 1;
+    font-weight: normal;
+    text-decoration: inherit;
+    text-align: center;
+    speak: none;
+    float:left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ui.list .item > .icon.hand.down {
+
+    margin: 0em 0.75em 0em 0em;
+}
+
+.ui.list .item > .icon.heart{
+
+    margin: 0em 0.8em 0em 0em;
+}
+
+.fa-15x{
+    font-size:1.5em;
+}
+
+.edita .ui.list a:hover .icon,  .edita .ui.list a:hover i{
+
+    color: #FF4121;
+    -webkit-transform: scale(2);
+}
+
+.cadastro .ui.list a:hover .icon,  .cadastro .ui.list a:hover i{
+
+    color: #3E3773;
+    -webkit-transform: scale(2);
+}
+
+.relatorios .ui.list a:hover .icon,  .relatorios .ui.list a:hover i{
+
+    color: #009A93;
+    -webkit-transform: scale(2);
+}
+
+
+.cadastro a, .edita a, .relatorios a{
 
     margin-bottom: 1em;
-
 }
+
 form{
 
     padding: 10px;

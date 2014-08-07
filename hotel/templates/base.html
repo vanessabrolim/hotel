@@ -2,27 +2,24 @@
 <html>
 <head>
     <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/semantic.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/font-awesome.css'/>
     <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/hotel.css'/>
     <title>Casinha - {% block title %} {% endblock %}</title>
 </head>
 <body>
-    <header class='ui three column divided grid center middle aligned'>
-        <div class='row'>
-            <nav id='esquerda' class='two column'>
-                <div class='row'>
-                    <a href='/cadastro1/' class='column'>Cadastros</a>
-                    <a href='/alteracoes/'class='column'>Alterações</a>
-                </div>
-            </nav>
-            <figure id='logo' class='one column'>
-                <i class="massive home icon"></i>
-            </figure>
-            <nav id='direita' class='two column'>
-                <div class='row'>
-                    <a href='/relatorios/' class='column'>Relatórios</a>
-                    <a href='/config/'class='column'>Configurações</a>
-                </div>
-            </nav>
+    <header class='ui grid'>
+        <div class='middle aligned row'>
+            <div class='four column wide'>
+                <a href='/'><i class='massive icon home'></i></a>
+            </div>
+            <div class='eleven wide column '>
+                <nav class={% block menuColor %}{% endblock %}>
+                    <a href='/cadastro' class={% block navCadastro %}{% endblock %} > Cadastros </a>
+                    <a href='/editar' class={% block navAlteracoes %}{% endblock %}> Alterações </a>
+                    <a href='/relatorios' class={% block navRelatorios %}{% endblock %}> Relatórios </a>
+                    <a class={% block navConfig %}{% endblock %}> Configurações </a>
+                </nav>
+            </div>
         </div>
     </header>
 </body>

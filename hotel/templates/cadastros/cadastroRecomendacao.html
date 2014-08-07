@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Recomendação {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastro Recomendação</h3>
+                    <form action = "." method = "post" class=''> {% csrf_token %}
+                        <p></p>
+                         <div class='ui fluid input'>
+                            <input type='hidden' id='estadia' name='estadia' value={{ estadia }}>
+                            <input type='hidden' id ='ativa' name='ativa' value='0'>
+                            <label for = "tipo" class = "control-label" > Tipo de Recomendação </label>
+                            <select id='tipo' name='tipo'>
+                                <option value='med'>Medicamentosa</option>
+                                <option value='al'>Alimentar</option>
+                                <option value='soc'>Social</option>
+                                <option value='outra'>Outra</option>
+                            </select>
+                            <div class="ui ignored divider"></div>
+                             <label for = "intervalo" class = "control-label" > Intervalo  </label>
+                            <input id='intervalo' name='intervalo' type='text' placeholder='8 horas'>
+                            <div class="ui ignored divider"></div>
+                            <label for = "ultimo_horario" class = "control-label" >
+                            Último horário de administração </label>
+                            <input id='ultimo_horario' name='ultimo_horario' type='text' placeholder='HH:MM'>
+                            <div class="ui ignored divider"></div>
+                            <label for = "recomendacao" class = "control-label" > Recomendação </label>
+                            <input id='recomendacao' name='recomendacao' type='text' placeholder='Descrição da recomendação'>
+                            <div class="ui ignored divider"></div>
+                            <label for = "observacao" class = "control-label" > 
+                            Observações </label>
+                            <input id='observacao' name='observacao' type='text' placeholder='Observações'>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <button type = "submit" class='ui hover button purple circular small' > Cadastrar </button >
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

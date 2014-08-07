@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Escolha o animal</h3>
+                    <div class='ui relaxed divided list'>
+                        {% for animal in animais %}
+                            <div class='item'>
+                                {% with id=animal.id%}
+                                    {% url 'nEditaAnimal' id as link %}
+                                    <a href={{ link }}>{{ animal.nome }} - {{ animal.especie }}</a>
+                                {% endwith %}
+                            </div>
+                        {% endfor %}
+                        {% url 'nCadastroAnimal' cpf as cadastrar%}
+                        <div class="ui ignored divider"></div>
+                        <a href={{ cadastrar }}> <button type = "button" class='ui hover button purple circular small' > Cadastrar novo animal </button ></a>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

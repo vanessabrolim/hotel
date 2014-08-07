@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
+{% block navCadastro %}'item active'{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui purple ribbon huge label">Cadastrado com sucesso!</h3>
+                    <p>Dono: {{ dono }} </p>
+                    <p>Animal: {{ animal }} </p>
+                    <p>Data da Entrada: {{ estadia.data_entrada }} </p>
+                    <p>Horário da Entrada: {{ estadia.horario_entrada }} meses </p>
+                    <p>Data da Saída: {{ estadia.data_saida }} </p>
+                    <p>Horário da Saída {{ estadia.horario_saida }} </p>
+                     {% with estadia=estadia.id %}
+                        {% url 'nCadastroRecomendacao' estadia as recomendacao %}
+                        <a href={{ recomendacao }}><button type = "button" class='ui hover button purple circular small' > Cadastrar Recomendação </button >
+                    {% endwith %}
+                    
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
