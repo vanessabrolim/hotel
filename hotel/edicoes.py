@@ -9,11 +9,17 @@ import datetime
 
 @login_required
 def Editar(request):
+    '''
+        Renderiza a pagina com os links para edição
+    '''
     return render(request, 'alteracoes/edita.html', {})
 
 
 @login_required
 def EditarAnimalInicial(request):
+    '''
+        Pede o CPF para buscar os animais ligadoas à pessoa
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     if request.method == "POST" and form.is_valid():
@@ -55,6 +61,9 @@ def EditarAnimal(request, id):
 
 @login_required
 def EditarPessoaInicial(request):
+    '''
+        Lista os animais ligados à pessoa e verifica se existe alguma estadia ligada à pessoa
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     if request.method == "POST" and form.is_valid():
@@ -71,6 +80,9 @@ def EditarPessoaInicial(request):
 
 @login_required
 def EditarPessoa(request, cpf):
+    '''
+        Edita o cadastro de uma pessoa
+    '''
     pessoas = Pessoa.objects.filter(cpf=cpf)
     p = pessoas[0]
     form = FormPessoa(request.POST)
@@ -87,6 +99,9 @@ def EditarPessoa(request, cpf):
 
 @login_required
 def EditaEstadiaInicial(request):
+    '''
+        Busca por pessoas com o CPF, caso não existe redireciona para cadastro
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     if request.method == "POST" and form.is_valid():
@@ -104,6 +119,9 @@ def EditaEstadiaInicial(request):
 
 @login_required
 def EditaEstadiaSecundario(request, cpf):
+    '''
+        Lista os animais ligados à pessoa
+    '''
     if Animal.objects.filter(dono=cpf):
         animais = Animal.objects.filter(dono=cpf)
         return render(request, 'alteracoes/editaEstadiaSecundario.html',
@@ -114,7 +132,10 @@ def EditaEstadiaSecundario(request, cpf):
 
 @login_required
 def EditaEstadia(request, id):
-
+    '''
+        Edita estadia, ativa a estadia caso o período de estadia
+        inclua a data atual
+    '''
     form = FormEstadia(request.POST)
     agora = datetime.datetime.today()
     ano = str(agora.year)

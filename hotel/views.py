@@ -11,6 +11,9 @@ import datetime
 
 
 def register(request):
+    '''
+        Renderiza página para registro de usuários no sistema
+    '''
     erro = None
     user = None
     registered = False
@@ -29,6 +32,9 @@ def register(request):
 
 
 def ulogin(request):
+    '''
+        renderiza a paǵina de login
+    '''
     erro = None
     if request.method == 'POST':
         name = request.POST.get('username')
@@ -50,12 +56,19 @@ def ulogin(request):
 
 @login_required
 def ulogout(request):
+    '''
+        Renderiza a página de logout
+    '''
     logout(request)
     return redirect(reverse('nHome'))
 
 
 @login_required
 def home(request):
+    '''
+        Renderiza a página inical
+        Chama a função que valida os períodos de estadias, deixando-os ativou ou não
+    '''
     validaEstadia()
     pessoas = Pessoa.objects.all()
     animais = Animal.objects.all()
@@ -71,35 +84,44 @@ def home(request):
         envio.append(resposta)
     return render(request, 'home.html',
                   {'animais': animais, 'pessoas': pessoas,
-                   'estadias': estadias, 'prioridades':envio})
+                   'estadias': estadias, 'prioridades': envio})
 
 
 def validaEstadia():
+    '''
+    Valida as estadias de acordo com a data atual
+    '''
     es = Estadia.objects.all()
     hj = datetime.datetime.today()
     for e in es:
         if e.data_saida.month <= hj.month:
             if e.data_saida.day <= hj.day:
                 if e.data_saida.year <= hj.year:
-                    if e.data_saida.hour> hj.hour:
-                        e.ativa=0
+                    if e.data_saida.hour > hj.hour:
+                        e.ativa = 0
                         e.save()
 
 
 def naoRolou(request):
+    '''
+        Página de teste
+    '''
     return render(request, 'naoRolou.html', {})
 
 
 @login_required
 def config(request):
+    '''
+        Renderiza a página de configurações
+    '''
     total = Acomodacao.objects.all()
     if total:
         total = total[0].total
     else:
         total = 20
     if request.method == 'POST':
-        total = int(request.POST.get('total')) 
-        pr = int(request.POST.get('prioritarias')) 
+        total = int(request.POST.get('total'))
+        pr = int(request.POST.get('prioritarias'))
         p = Quantidade.objects.all()
         if p:
             p.delete()
@@ -117,7 +139,8 @@ def config(request):
     else:
         prioritarias = Quantidade.objects.all()
         if prioritarias:
-            prioritarias= prioritarias[0].qtd
+            prioritarias = prioritarias[0].qtd
         else:
-            prioritarias=5
-        return render(request, 'config.html', {'total':total, 'prioridade':prioritarias})
+            prioritarias = 5
+        return render(request, 'config.html',
+                      {'total': total, 'prioridade': prioritarias})

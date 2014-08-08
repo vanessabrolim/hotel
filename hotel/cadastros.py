@@ -12,11 +12,16 @@ from django.utils.dateformat import DateFormat
 
 @login_required
 def Cadastro(request):
+    ''' Renderiza a página de cadastro'''
     return render(request, 'cadastros/cadastro.html', {})
 
 
 @login_required
 def CadastroPessoaInicial(request):
+    ''' 
+        Usando o CPF do input, busca por pessoas com esse CPF. Se já existirem,
+        redireciona para a edição do cadastro. Senão, envia para cadastrar.
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     nome = request.POST.get('nome')
@@ -34,6 +39,9 @@ def CadastroPessoaInicial(request):
 
 @login_required
 def CadastroPessoa(request, cpf):
+    '''
+        Faz novo cadastro e redireciona para página de sucesso
+    '''
     form = FormPessoa(request.POST)
     if request.method == 'POST':
         form.cpf = int(request.POST.get('cpf'))
@@ -50,6 +58,9 @@ def CadastroPessoa(request, cpf):
 
 @login_required
 def CadastroAnimalInicial(request):
+    '''
+        Busca por pessoa, a partir do cpf, para listar os animais que estão ligados à pessoa
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     if request.method == "POST" and form.is_valid():
@@ -67,6 +78,9 @@ def CadastroAnimalInicial(request):
 
 @login_required
 def CadastroAnimalSecundario(request, cpf):
+    '''
+        Retorna todos os animais que a pessoa possui, caso não possua nenhum envia para cadastro de animais
+    '''
     if Animal.objects.filter(dono=cpf):
         animais = Animal.objects.filter(dono=cpf)
         return render(request, 'cadastros/cadastroAnimalSecundario.html',
@@ -77,6 +91,9 @@ def CadastroAnimalSecundario(request, cpf):
 
 @login_required
 def CadastroAnimal(request, cpf):
+    '''
+        Faz novo cadastro de animal e redireciona para página de sucesso
+    '''
     if request.method == "POST":
         form = FormAnimal(request.POST)
         if form.is_valid():
@@ -94,6 +111,10 @@ def CadastroAnimal(request, cpf):
 
 @login_required
 def CadastroEstadiaInicial(request):
+    '''
+        Pede o CPF para buscar a pessoas e os animais que pertencem a ela.
+        Se a pessoa não existir, redireciona para novo cadastro
+    '''
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
     if request.method == "POST" and form.is_valid():
@@ -111,6 +132,9 @@ def CadastroEstadiaInicial(request):
 
 @login_required
 def CadastroEstadiaSecundario(request, cpf):
+    '''
+        Lista os animais que pertencem à pessoa
+    '''
     if Animal.objects.filter(dono=cpf):
         animais = Animal.objects.filter(dono=cpf)
         return render(request, 'cadastros/cadastroEstadiaSecundario.html',
@@ -121,6 +145,11 @@ def CadastroEstadiaSecundario(request, cpf):
 
 @login_required
 def CadastroEstadia(request, id):
+    '''
+        Faz novo cadastro de estadia
+        Se a estadia for na data atual, deixa-a ativa
+        Subtrai uma acomocação
+    '''
     form = FormEstadia(request.POST)
     agora = datetime.datetime.today()
     ano = str(agora.year)
@@ -132,7 +161,7 @@ def CadastroEstadia(request, id):
         dia = '0' + str(dia)
     hoje = dia + '/' + mes + '/' + ano
     if request.method == 'POST':
-        prioridade=int(request.POST.get('prioridade'))
+        prioridade = int(request.POST.get('prioridade'))
         de = request.POST.get(
             'data_entrada') + ' ' + request.POST.get('horario_entrada')
         form.data_entrada = datetime.datetime.strptime(de, "%d/%m/%Y %H:%M")
@@ -146,16 +175,15 @@ def CadastroEstadia(request, id):
             estadia.save()
         a = Acomodacao.objects.all()
         qtd = a[0].livres
-        nova = Acomodacao(total=a[0].total, livres = qtd-1)
+        nova = Acomodacao(total=a[0].total, livres=qtd - 1)
         a.delete()
         nova.save()
         animal = Animal.objects.get(id=estadia.animal)
         dono = Pessoa.objects.get(cpf=animal.dono)
         return render(request, 'cadastros/sucessoEstadia.html',
-                      {'form': form, 'animal': animal.nome, 'dono':dono.nome, 'estadia':estadia})
+                      {'form': form, 'animal': animal.nome,
+                       'dono': dono.nome, 'estadia': estadia})
     else:
         form = FormEstadia()
     return render(request, 'cadastros/cadastroEstadia.html',
                   {'form': form, 'animal': id})
-
-
