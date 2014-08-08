@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/semantic.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/font-awesome.css'/>
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}css/hotel.css'/>
+    <title>Casinha - Registrar</title>
+</head>
+<body>
+    <header class='ui grid'>
+        <div class='middle aligned row'>
+            <div class='four column wide'>
+                <a href='/'><i class='massive icon home'></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class='ui grid'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                     <h3 class="ui green ribbon huge label">Login</h3>
+                    <form action = "." method = "post"> {% csrf_token %}
+                        <p></p>
+                        {% if not registered %}
+                        <div class='ui fluid input'>
+
+                            {% if erro == 'naoExiste' %}
+                                <p> Esse nome de usuário não existe!</p>
+                            {% endif %}
+                            {% if erro == 'errado' %}
+                                <p> Usuário ou senha incorretos</p>
+                            {% endif %}
+                            <label for='username'> Nome de usuário</label>
+                            <input type='text' id='username' name='username' required>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <div class='ui fluid input'>
+                            <label for='password'> Senha</label>
+                            <input type='password' id='password' name='password' required>
+                        </div>
+                        <div class="ui ignored divider"></div>
+                        <button type = "submit" class='ui hover button green circular small' > Login </button >
+                        {% else %}
+                        <p>Obrigada por se registrar no Casinha!!</p>
+                        <p> <a href='/login'>Faça Login</a></p>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

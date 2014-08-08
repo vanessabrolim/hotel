@@ -6,22 +6,46 @@
 {% block navRelatorios %}'item'{% endblock %}
 {% block navConfig %}'item'{% endblock %}
 {% block content %}
-    {% for animal in animais%}
-        {{ animal.nome }}
-        {{ animal.dono }}<br/>
-    {% endfor %}
-    <p>------------------------------------</p>
-    {% for pessoa in pessoas %}
-        {{ pessoa.nome }} - {{ pessoa.id }} - {{ pessoa.cpf }} <br/>
-    {% endfor %}
-    <p>------------------------------------</p>
-    {% for estadia in estadias %}
-        {{estadia.animal}}
-        {{ estadia.data_entrada |date:"d/m/Y"}}<br/>
-        {{ estadia.horario_entrada | time:"H:i"}}<br/>
-        {{ estadia.data_saida |date:"d/m/Y"}}<br/>
-        {{ estadia.horario_saida | time:"h:i"}}<br/>
-        ativa: {{ estadia.ativa }}
-    {% endfor %}
+
+<div class='ui grid cadPessoa'>
+    <div class='row'>
+        <div class='two wide column'>
+        </div>
+        <div class='twelve wide column'>
+            <div class='ui raised segment grid'>
+                <div class='row'></div>
+                <div class='row'>
+                    <div class='one wide column'>
+                    </div>
+                    <div class='seven wide column'>
+                        <div class='ui green segment'>
+                            <h5 class="ui dividing header">
+                                Hóspedes
+                            </h5>
+                            <p> Hoje temos {{ estadias|length}} animais hospedados</p>
+                        </div>
+                    </div>
+                    <div class='seven wide column'>
+                        <div class='ui red segment'>
+                            <h5 class="ui dividing header">
+                                Recomendações prioritárias
+                            </h5>
+                                {% if prioridades %}
+                                    {% for prioridade in prioridades %}<p>
+                                        {{ prioridade.animal.nome }} - 
+                                        {{ prioridade.prioridade.recomendacao }} </p>
+                                        <div class="ui ignored divider"></div>
+                                    {% endfor%}
+                                {% else %}
+                                    Não existem mais recomendações para hoje!
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class='row'></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

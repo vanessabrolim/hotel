@@ -9,6 +9,11 @@ h3.ui.ribbon.label{
 
     left:-2.25rem;
 }
+
+.direita{
+
+    float:right;
+}
 a{
 
     text-decoration: none;

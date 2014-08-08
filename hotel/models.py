@@ -6,7 +6,7 @@ class Pessoa (models.Model):
     telefoneCel = models.CharField(max_length=15)
     telefone = models.CharField(max_length=15)
     endereco = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11)
+    cpf = models.IntegerField()
 
 
 class Animal (models.Model):
@@ -19,36 +19,20 @@ class Animal (models.Model):
     dono = models.IntegerField()
 
 
-class Cumprimento (models.Model):
-    horario = models.TimeField()
+class Acomodacao(models.Model):
+    total = models.IntegerField(default=20)
+    livres = models.IntegerField(default=20)
 
-
-class Recomendacao (models.Model):
-    MEDICAMENTOSA = 'med'
-    ALIMENTAR = 'al'
-    SOCIAL = 'soc'
-    OUTRA = 'outra'
-    TIPO_ESCOLHAS = (
-        (MEDICAMENTOSA, 'Medicamentosa'),
-        (ALIMENTAR, 'Alimentar'),
-        (SOCIAL, 'Social'),
-        (OUTRA, 'Outra')
-    )
-    estadia = models.IntegerField()
-    tipo = models.CharField(
-        max_length=50, choices=TIPO_ESCOLHAS, default=OUTRA)
-    intervalo_horario = models.IntegerField()
-    ultimo_horario = models.TimeField()
-    recomendacao = models.CharField(max_length=50)
-    #cumprida = models.ManyToManyField(Cumprimento)
+class Quantidade(models.Model):
+    qtd = models.IntegerField(default=5)
 
 
 class Estadia (models.Model):
     animal = models.IntegerField()
-    data_entrada = models.DateField()
-    horario_entrada = models.TimeField()
-    data_saida = models.DateField()
-    horario_saida = models.TimeField()
+    data_entrada = models.DateTimeField()
+    data_saida = models.DateTimeField()
     forma = models.CharField(max_length=15)
     observacao = models.CharField(max_length=80)
     ativa = models.IntegerField()
+    recomendacao = models.CharField(max_length=150)
+    prioridade = models.IntegerField()

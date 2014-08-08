@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Relatórios {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu teal' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item active'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+{% block content %}
+    <div class='ui grid relatorios'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                     <h3 class="ui teal ribbon huge label">Acomodações Livres</h3>
+                     <p></p>
+                     <p>Nesse momento temos {{ acomodacao.livres }} acomodações livres.</p>
+
+                     <a href='/relatorios/hospedados'>Ver animais hospedados</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

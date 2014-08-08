@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} Relatórios {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu teal' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item active'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+{% block content %}
+    <div class='ui grid relatorios'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui teal ribbon huge label">Animais Hospedados</h3>
+                    {% for cada in envio %}
+                        <h5 class="ui dividing header">
+                            Animal
+                        </h5>
+                            {{ cada.animal.nome}} -  
+                            {{ cada.animal.especie}} - 
+                            {{ cada.animal.raca }} <br/>
+                        <h5 class="ui dividing header">
+                            Dono
+                        </h5>
+                            {{ cada.pessoa.nome }} - 
+                            {{ cada.pessoa.telefoneCel }}
+                            {% if cada.pessoa.telefone%}
+                                 - {{ cada.pessoa.telefone }}
+                            {% endif %}
+                        <h5 class="ui dividing header">
+                            Estadia
+                        </h5>
+                            Entrada: {{ cada.estadia.data_entrada }} <br/><br/>
+                            Forma: {{ cada.estadia.forma }}<br/><br/>
+                            {% if cada.estadia.observacao%}
+                               Observações: {{ cada.estadia.observacao }}<br/><br/>
+                            {% endif %}
+                         <div class="ui ignored divider"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

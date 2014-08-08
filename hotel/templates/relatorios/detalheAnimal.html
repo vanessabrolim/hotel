@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Relatórios {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu teal' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item active'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+{% block content %}
+    <div class='ui grid relatorios'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui teal ribbon huge label">Detalhe Animal</h3>
+                    <h5 class="ui dividing header">
+                            Animal
+                    </h5>
+                        {{ animal.nome}} -  
+                        {{ animal.especie}} - 
+                        {{ animal.raca }} <br/>
+                        {{ animal.pelagem}} - {{ animal.caracteristica_marcante}}
+                    <h5 class="ui dividing header">
+                        Dono
+                    </h5>
+                        {{ dono.nome }} - 
+                        {{ dono.endereco }} <br/>
+                        {{ dono.telefone }} - 
+                        {{ dono.telefoneCel }}
+                    {% if estadia %}
+                        <h5 class="ui dividing header">
+                            Estadia
+                        </h5>
+                            De {{ estadia.data_entrada }} a 
+                            {{ estadia.data_saida }} - 
+                            {{ estadia.forma }}<br/>
+                            {{ estadia.observacao }}
+                    {% endif %}
+                    {% if recomendacoes %}
+                        <h5 class="ui dividing header">
+                            Estadia
+                        </h5>
+                        {% for r in recomendacoes %}
+                            {{ r.tipo }}
+                            {{ r.recomendacao }}
+                            {{ r.intervalo_horario }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

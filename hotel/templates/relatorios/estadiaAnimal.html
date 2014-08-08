@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} Cadastro Pessoa {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu teal' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item active'{% endblock %}
+{% block navConfig %}'item'{% endblock %}
+
+{% block content %}
+    <div class='ui grid cadPessoa'>
+        <div class='row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui teal ribbon huge label">Cadastro Animal</h3>
+                    {% if animais %}
+                        {% for animal in animais %}
+                            {% with id=animal.id%}
+                                {% url 'nDetalheAnimal' id as link %}
+                                <p><a href={{ link }}>{{ animal.nome }} - {{animal.especie}} </a></p>
+                            {% endwith %}
+                        {% endfor %}
+                    {% else %}
+                        <p> Nenhum animal satisfaz essa busca.</p>
+                        <a href = '/relatorios/animalInicial'> <button type = "button" class='ui hover button teal circular small' > Buscar Novamente</button ></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}

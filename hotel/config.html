@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Relatórios {% endblock %}
+
+{% block menuColor %} 'ui fluid four large item menu green' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item'{% endblock %}
+{% block navRelatorios %}'item '{% endblock %}
+{% block navConfig %}'item active'{% endblock %}
+{% block content %}
+
+    <div class='ui grid relatorios'>
+        <div class='middle aligned row'>
+            <div class='two wide column'>
+            </div>
+            <div class='twelve wide column'>
+                <div class='ui raised segment'>
+                    <h3 class="ui teal ribbon huge label">Configurações</h3>
+                     <form action = "." method = "post" class=''>
+                        <p></p>
+                         <div class='ui fluid input'>
+                            <label for = "total" class = "control-label" > Data da Entrada </label>
+                            <input id='total' name='total' type='text' placeholder='Acomodações Livres'>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

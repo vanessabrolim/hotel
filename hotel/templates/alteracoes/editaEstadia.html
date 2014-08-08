@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block title %} Cadastro Estadia {% endblock %}
-{% block menuColor %} 'ui fluid four large item menu purple' {% endblock %}
-{% block navCadastro %}'item active'{% endblock %}
-{% block navAlteracoes %}'item'{% endblock %}
+{% block title %} Edita Estadia {% endblock %}
+{% block menuColor %} 'ui fluid four large item menu orange' {% endblock %}
+{% block navCadastro %}'item '{% endblock %}
+{% block navAlteracoes %}'item active'{% endblock %}
 {% block navRelatorios %}'item'{% endblock %}
 {% block navConfig %}'item'{% endblock %}
 
@@ -14,71 +14,69 @@
             </div>
             <div class='twelve wide column'>
                 <div class='ui raised segment'>
-                    <h3 class="ui purple ribbon huge label">Cadastro Estadia</h3>
+                    <h3 class="ui orange ribbon huge label">Edita Estadia</h3>
                     <form action = "." method = "post" class=''> {% csrf_token %}
                         <p></p>
                         <label for = "data_entrada" class = "control-label" > Data da Entrada </label>
                          <div class='ui fluid input'>
-                            <input type='hidden' id='animal' name='animal' value={{ animal }}>
+                            <input type='hidden' id='animal' name='animal' value={{ estadia.id }}>
                             <input type='hidden' id ='ativa' name='ativa' value='0'>
-                            <input id='data_entrada' name='data_entrada' type='text' placeholder={% now "d/m/Y" %} value={% now "d/m/Y" %}>
-                            <div class="ui corner purple label">
+                            <input id='data_entrada' name='data_entrada' type='text' placeholder={% now "d m/ " %} value='{{ estadia.data_entrada|date:"d/m/Y"}}'>
+                            <div class="ui corner orange label">
                                 <i class="asterisk icon"></i>
                             </div>
                         </div>
                          <div class="ui ignored divider"></div>
                         <label for = "dataEntrada" class = "control-label" > Horário da Entrada </label>
                         <div class='ui fluid input'>
-                            <input id='horario_entrada' name='horario_entrada' type='text' placeholder={% now "H:i" %} value={% now "H:i" %}>
-                            <div class="ui corner purple label">
+                            <input id='horario_entrada' name='horario_entrada' type='text' placeholder={% now "H:i" %} value='{{ estadia.data_entrada|date:"H:i"}}'>
+                            <div class="ui corner orange label">
                                 <i class="asterisk icon"></i>
                             </div>
                         </div>
                         <div class="ui ignored divider"></div>
                         <label for = "data_saida" class = "control-label" >Data Prevista para a Saída </label>
-                            
                         <div class='ui fluid input'>
-                            <input id='data_saida' name='data_saida' type='text' placeholder='dd/mm/aaaa'>
+                            <input id='data_saida' name='data_saida' type='text' placeholder='dd/mm/aaaa' value='{{ estadia.data_saida|date:"d/m/Y"}}'}>
                             <div class="ui ignored divider"></div>
-                            <div class="ui corner purple label">
+                            <div class="ui corner orange label">
                                 <i class="asterisk icon"></i>
                             </div>
                         </div>
                         <label for = "horario_saida" class = "control-label" > Horário Previsto para a Saída </label>
                         <div class='ui fluid input'>
-                            <input id='horario_saida' name='horario_saida' type='text' placeholder='hh:mm'>
-                            <div class="ui corner purple label">
+                            <input id='horario_saida' name='horario_saida' type='text' placeholder='hh:mm' value='{{ estadia.data_saida|date:"H:i"}}'>
+                            <div class="ui corner orange label">
                                 <i class="asterisk icon"></i>
                             </div>
                             <div class="ui ignored divider"></div>
                         </div>
                          <label for = "forma" class = "control-label" > Forma de acomodação </label>
                         <div class='ui fluid input'>
-                            <input id='forma' name='forma' type='text' placeholder='Livre/Em gaiola'>
-                            <div class="ui corner purple label">
+                            <input id='forma' name='forma' type='text' placeholder='Livre/Em gaiola' value={{estadia.forma}}>
+                            <div class="ui corner orange label">
                                 <i class="asterisk icon"></i>
                             </div>
                             <div class="ui ignored divider"></div>
                         </div>
                         <label for = "observacao" class = "control-label" >Observações </label>
                         <div class='ui fluid input'>
-                            <input id='observacao' name='observacao' type='text' placeholder='Observações'>
+                            <input id='observacao' name='observacao' type='text' placeholder='Observações' value={{estadia.observacao }}>
                         </div>
-                        <div class="ui ignored divider"></div>
-                        <h5 class="ui dividing header">
+                         <h5 class="ui dividing header">
                             Recomendações
                         </h5>
                         <label for = "recomendacao" class = "control-label" >Recomendação </label>
                         <div class='ui fluid input'>
-                            <input id='recomendacao' name='recomendacao' type='text' placeholder='Recomendação'>
+                            <input id='recomendacao' name='recomendacao' type='text' placeholder='Recomendação' value='{{estadia.recomendacao}}'>
                             <div class="ui ignored divider"></div>
                         </div>
                          <label for = "prioridade" class = "control-label" >Prioridade </label>
                         <div class='ui fluid input'>
-                            <input id='prioridade' name='prioridade' type='text' placeholder='Prioridade'>
+                            <input id='prioridade' name='prioridade' type='text' placeholder='Prioridade' value={{estadia.prioridade}}>
                             <div class="ui ignored divider"></div>
                         </div>
-                        <button type = "submit" class='ui hover button purple circular small' > Cadastrar </button >
+                        <button type = "submit" class='ui hover button orange circular small' > Editar </button >
                     </form>
                 </div>
             </div>

@@ -17,12 +17,24 @@
                     <a href='/cadastro' class={% block navCadastro %}{% endblock %} > Cadastros </a>
                     <a href='/editar' class={% block navAlteracoes %}{% endblock %}> Alterações </a>
                     <a href='/relatorios' class={% block navRelatorios %}{% endblock %}> Relatórios </a>
-                    <a class={% block navConfig %}{% endblock %}> Configurações </a>
+                    <a href='/configuracoes'class={% block navConfig %}{% endblock %}> Configurações </a>
                 </nav>
             </div>
         </div>
     </header>
+    {% if user.is_authenticated %}
+            <div class='four column wide direita'>
+                <a href='/logout'>Logout </a><br/> 
+                
+            </div>
+        {% else %}
+            <div class='four column wide'>
+                <a href='/login'><button type = "button" class='ui hover button green circular small' > Login </button ></a><br/> 
+                
+            </div>
+        {% endif %}
+    {% block content %}
+    {% endblock %}
+     
 </body>
-{% block content %}
-{% endblock %}
 </html>

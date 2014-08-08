@@ -3,16 +3,19 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
+from django.contrib.auth.decorators import login_required
 from models import *
 from forms import *
 import datetime
 from django.utils.dateformat import DateFormat
 
 
+@login_required
 def Cadastro(request):
     return render(request, 'cadastros/cadastro.html', {})
 
 
+@login_required
 def CadastroPessoaInicial(request):
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
@@ -29,8 +32,11 @@ def CadastroPessoaInicial(request):
                   {'cpf': cpf, })
 
 
+@login_required
 def CadastroPessoa(request, cpf):
     form = FormPessoa(request.POST)
+    if request.method == 'POST':
+        form.cpf = int(request.POST.get('cpf'))
     if request.method == "POST" and form.is_valid():
         form.save()
         cpf = request.POST.get('cpf')
@@ -42,6 +48,7 @@ def CadastroPessoa(request, cpf):
     return render(request, 'cadastros/cadastroPessoa.html', {'cpf': cpf, })
 
 
+@login_required
 def CadastroAnimalInicial(request):
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
@@ -58,6 +65,7 @@ def CadastroAnimalInicial(request):
                   {'cpf': cpf, })
 
 
+@login_required
 def CadastroAnimalSecundario(request, cpf):
     if Animal.objects.filter(dono=cpf):
         animais = Animal.objects.filter(dono=cpf)
@@ -67,6 +75,7 @@ def CadastroAnimalSecundario(request, cpf):
         return redirect(reverse('nCadastroAnimal', kwargs={'cpf': cpf}))
 
 
+@login_required
 def CadastroAnimal(request, cpf):
     if request.method == "POST":
         form = FormAnimal(request.POST)
@@ -83,6 +92,7 @@ def CadastroAnimal(request, cpf):
                   {'form': form, 'cpf': cpf, })
 
 
+@login_required
 def CadastroEstadiaInicial(request):
     form = FormCPF(request.POST)
     cpf = request.POST.get('cpf')
@@ -99,6 +109,7 @@ def CadastroEstadiaInicial(request):
                   {'cpf': cpf, })
 
 
+@login_required
 def CadastroEstadiaSecundario(request, cpf):
     if Animal.objects.filter(dono=cpf):
         animais = Animal.objects.filter(dono=cpf)
@@ -108,6 +119,7 @@ def CadastroEstadiaSecundario(request, cpf):
         return redirect(reverse('nCadastroAnimal', kwargs={'cpf': cpf}))
 
 
+@login_required
 def CadastroEstadia(request, id):
     form = FormEstadia(request.POST)
     agora = datetime.datetime.today()
@@ -115,96 +127,35 @@ def CadastroEstadia(request, id):
     mes = agora.month
     dia = agora.day
     if mes < 10:
-        mes = '0'+str(mes)
+        mes = '0' + str(mes)
     if dia < 10:
-        dia = '0'+str(dia)
-    hoje = dia+'/'+mes+'/'+ano
+        dia = '0' + str(dia)
+    hoje = dia + '/' + mes + '/' + ano
     if request.method == 'POST':
-        form.data_entrada = datetime.datetime.strptime(
-            request.POST.get('data_entrada'), "%d/%m/%Y")
-        form.data_saida = datetime.datetime.strptime(
-            request.POST.get('data_saida'), "%d/%m/%Y")
-        form.horario_entrada = datetime.datetime.strptime(
-            request.POST.get('horario_entrada'), "%H:%M")
-        form.horario_saida = datetime.datetime.strptime(
-            request.POST.get('horario_saida'), "%H:%M")
+        prioridade=int(request.POST.get('prioridade'))
+        de = request.POST.get(
+            'data_entrada') + ' ' + request.POST.get('horario_entrada')
+        form.data_entrada = datetime.datetime.strptime(de, "%d/%m/%Y %H:%M")
+        ds = request.POST.get(
+            'data_saida') + ' ' + request.POST.get('horario_saida')
+        form.data_saida = datetime.datetime.strptime(ds, "%d/%m/%Y %H:%M")
     if request.method == "POST" and form.is_valid():
         estadia = form.save()
-        if request.POST.get('data_entrada') == hoje:
+        if request.POST.get('data_entrada') <= hoje:
             estadia.ativa = 1
             estadia.save()
+        a = Acomodacao.objects.all()
+        qtd = a[0].livres
+        nova = Acomodacao(total=a[0].total, livres = qtd-1)
+        a.delete()
+        nova.save()
         animal = Animal.objects.get(id=estadia.animal)
         dono = Pessoa.objects.get(cpf=animal.dono)
         return render(request, 'cadastros/sucessoEstadia.html',
-                      {'estadia': estadia, 'animal': animal.nome,
-                       'dono': dono.nome})
+                      {'form': form, 'animal': animal.nome, 'dono':dono.nome, 'estadia':estadia})
     else:
         form = FormEstadia()
-    id=1
     return render(request, 'cadastros/cadastroEstadia.html',
                   {'form': form, 'animal': id})
 
 
-def CadastroRecomendacaoInicial(request):
-    form = FormCPF(request.POST)
-    cpf = request.POST.get('cpf')
-    if request.method == "POST" and form.is_valid():
-        if Pessoa.objects.filter(cpf=cpf):
-            return redirect(reverse('nCadastroRecomendacaoSecundaria',
-                                    kwargs={'cpf': cpf}))
-        else:
-            return redirect(reverse('nCadastroPessoa', kwargs={'cpf': cpf}))
-    else:
-        form = FormCPF()
-
-    return render(request, 'cadastros/cadastroRecomendacaoInicial.html',
-                  {'form': form})
-
-
-def CadastroRecomendacaoSecundaria(request, cpf):
-    if Animal.objects.filter(dono=cpf):
-        animais = Animal.objects.filter(dono=cpf)
-        estadias = []
-        for animal in animais:
-            estadiasT = Estadia.objects.filter(animal=animal.id)
-            for estadis in estadiasT:
-                if estadis.ativa:
-                    estadis.nomeAnimal = animal.nome
-                    estadias.append(estadis)
-        return render(request, 'cadastros/cadastroRecomendacaoSecundaria.html',
-                      {'estadias': estadias, 'cpf': cpf, })
-    else:
-        return redirect(reverse('nCadastroAnimal', kwargs={'cpf': cpf}))
-
-
-def CadastroRecomendacaoTerceira(request, id):
-    if Estadia.objects.filter(animal=id):
-        estadias = Estadia.objects.filter(animal=id)
-        return render(request, 'cadastros/cadastroRecomendacao.html',
-                      {'estadias': estadias, 'id': id, })
-    else:
-        return redirect(reverse('nCadastroEstadia', kwargs={'id': id}))
-
-
-def CadastroRecomendacao(request,id):
-    form = FormRecomendacao(request.POST)
-    if request.method == "POST" and form.is_valid():
-        recomendacao = form.save()
-        return HttpResponseRedirect(reverse('nHome'))
-    else:
-        form = FormRecomendacao()
-
-    return render(request, 'cadastros/cadastroRecomendacao.html',
-                  {'form': form, })
-
-
-def CadastroCumprimento(request):
-    form = FormCumprimento(request.POST)
-    if request.method == "POST" and form.is_valid():
-        cumprimento = form.save()
-        return HttpResponseRedirect(reverse('nHome'))
-    else:
-        form = FormCumprimento()
-
-    return render(request, 'cadastros/CadastroCumprimento.html',
-                  {'form': form, })
